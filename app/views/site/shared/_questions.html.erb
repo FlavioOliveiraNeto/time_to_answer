@@ -7,7 +7,7 @@
             <span class="badge badge-info">
               <%= link_to "#{question.subject.description} (#{question.subject.questions_count})", site_search_subject_path(question.subject_id, question.subject.description) %>
             </span>
-            <h5 class="card-title"> <%= question.description %> </h5>
+            <h5 class="card-title"> <%= sanitize question.description %> </h5>
           </div>
           <div class="card-body">
             <ul>

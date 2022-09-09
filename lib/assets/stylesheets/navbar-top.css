@@ -47,8 +47,8 @@ body {
 }
 
 .card-title {
-  font-weight: bold; 
-  font-size:1.2rem
+  font-weight: normal; 
+  font-size:1.3rem
 }
 
 .card-body {
