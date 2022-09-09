@@ -1,0 +1,63 @@
+<div style="margin: 15px 0 0 0;">
+  <button type="submit" class="btn btn-primary btn-circle btn-lg">
+    <a class="nav-link active" aria-current="page" href="http://localhost:3000/">
+      <p class="fa fa-home" style="color: white"></p> 
+    </a> 
+  </button>
+</div>
+<div class="login_wrapper">
+  <div class="animate form login_form">
+    <div class="login_content" style="width: 800px; height: 500px; margin-left: -225px">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+          <h1>Cadastro de Usuário</h1>
+
+          <div class="form-group" style="margin: 10px 25px 0 5px; font-size: 16px; text-align: left">
+            <%= form.label :email %>
+            <%= form.text_field :email, 
+            class:"form-control",
+            style:"margin: 0 25px 0 5px;", 
+            placeholder: t('placeholder.user_email') %>
+          </div>
+
+          <div class="form-group" style="margin: 30px 25px 0 5px; font-size: 16px; text-align: left">
+            <%= form.label t('activerecord.attributes.admin.password') %>
+            <%= form.password_field t('activerecord.attributes.admin.password'), 
+            class:"form-control",
+            style:"margin: 0 25px 0 5px",  
+            placeholder: t('placeholder.admin_password') %>
+          </div>
+
+          <div class="form-group" style="margin: 30px 25px 0 5px; font-size: 16px; text-align: left">
+            <%= form.label t('activerecord.attributes.admin.password_confirmation') %>
+            <%= form.password_field t('activerecord.attributes.admin.password_confirmation'), 
+            class:"form-control",
+            style:"margin: 0 25px 0 5px",  
+            placeholder: t('placeholder.admin_password_confirmation') %>
+          </div>
+
+          <div class="separator" style="margin: 40px 0 0 0">
+            <div class="actions" style="margin: 10px 25px 0 5px;">
+              <button type="submit" 
+                      class="btn btn-primary"
+                      style="margin: 0 25px 0 5px; width: 200px; font-size: 18px;"> 
+                <%= t('buttons.save') %> 
+              </button>
+
+              <button type="submit" 
+                      class="btn btn-secondary"
+                      style="margin: 0 25px 0 5px; width: 200px; font-size: 18px; text-align: center">
+                <a href="http://localhost:3000/users/sign_in" 
+                    style="color: white; font-size: 18px; margin: 0; text-decoration: none"> 
+                  <%= t('buttons.log-in') %> 
+                </a>       
+              </button>
+            </div>
+          </div>  
+        <% end %>
+      </div>
+      <!-- /.col-lg-6 (nested) -->
+    </div>
+    <!-- /.row (nested) -->
+  </div>
+  <!-- /.panel-body -->
+</div>

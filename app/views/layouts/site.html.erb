@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title>Página Inicial</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application' %>
+    <%= stylesheet_link_tag    'site' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+      
+        <%= link_to 'Time To Answer', root_path, class:"navbar-brand" %>
+
+        <div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+                  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0" style="position: absolute; right: 40%; font-size: 18px;">
+            <li class="nav-item" style="border-right: 1px solid gray">
+              <a class="nav-link active" aria-current="page" href="http://localhost:3000/">Página Inicial</a>
+            </li>
+            <li class="nav-item" style="border-right: 1px solid gray">
+              <a class="nav-link" href="http://localhost:3000/users_backoffice/welcome/index">Usuário</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:3000/admins_backoffice/welcome/index" >Administrador</a>
+            </li>
+          </ul>
+          <div style="position: absolute; right: 30px">
+            <%= form_with(url: site_search_path, local: true, method: :get, class:"d-flex") do |form| %>
+              <%= form.text_field :term, class:"form-control me-2", placeholder:"Digite aqui sua busca" %>
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="jumbotron panel-1">
+        <h1>Bem vindo ao Time to Answer</h1>
+      </div>
+      <div class="panel-2">
+        <p><%= msg_jumbotron %></p>
+      </div>
+      <%= yield %>
+    </main>
+
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'site' %>
+
+    <% if notice %>
+        <%= javascript_tag do %>
+            $.bootstrapGrowl('<%= notice %>', {
+                type: 'danger', // (null, 'info', 'danger', 'success')
+                offset: {from: 'top', amount: 50}, // 'top', or 'bottom'
+                align: 'right', // ('left', 'right', or 'center')
+                width: 350, // (integer, or 'auto')
+                allow_dismiss: true, // If true then will display a cross to close the popup.
+                stackup_spacing: 10 // spacing between consecutively stacked growls.
+            });
+        <% end %>
+    <% end %>
+
+  </body>
+</html>

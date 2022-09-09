@@ -1,0 +1,68 @@
+<!-- Outer Row -->
+<div class="row justify-content-center" style="margin-top: 100px">
+  <div style="background-color: white; border-radius: 30px; color: red; padding: 20px; width: fit-content; height: fit-content">
+    <%= render "admins/shared/error_messages", resource: resource %>
+  </div>
+  <div class="col-xl-10 col-lg-12 col-md-9">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+
+                <div class="text-center;" style="background-color: #4e73df; border-radius: 30px;">
+                  <h1 class="h4 mb-4" 
+                      style="color: white; font-size: 20px; padding: 10px 20px; text-align: center;">
+                    Cadastro de novo administrador
+                  </h1>
+                </div>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <div class="form-group">
+                    <%= f.label :email %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+                                      class:"form-control form-control-user", id:"exampleInputEmail",
+                                      placeholder:"Digite o email..." %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :password %>
+                    <%= f.password_field :password, autocomplete: "new-password",
+                                        class:"form-control form-control-user", id:"exampleInputPassword", 
+                                        placeholder:"Digite a senha..." %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                                        class:"form-control form-control-user", id:"exampleInputPassword", 
+                                        placeholder:"Confirme a senha..." %>
+                  </div>
+
+                  <div style="margin-top: 40px">
+                    <button type="submit" 
+                            class="btn btn-primary"
+                            style="margin: 0 10px 0 0; width: 134px; font-size: 16px; display: inline-block"> 
+                      <%= t('buttons.save') %> 
+                    </button>
+
+                    <button type="submit" 
+                        class="btn btn-secondary"
+                        style="margin: 0 25px 0 5px; width: fit-content; font-size: 18px; text-align: center; display: inline-block">
+                      <a href="http://localhost:3000/admins/sign_in" 
+                          style="color: white; font-size: 16px; margin: 0; text-decoration: none"> 
+                        <%= t('buttons.log-in') %> 
+                      </a>       
+                    </button>
+                  </div>          
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

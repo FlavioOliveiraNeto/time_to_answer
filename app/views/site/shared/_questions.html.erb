@@ -1,0 +1,40 @@
+<div class="row">
+  <% @questions.each do |question| %>
+    <div class="col-sm-5">
+      <%= form_with url: site_answer_path do |form| %>
+        <div class="card">
+          <div class="card-header">
+            <span class="badge badge-info">
+              <%= link_to "#{question.subject.description} (#{question.subject.questions_count})", site_search_subject_path(question.subject_id, question.subject.description) %>
+            </span>
+            <h5 class="card-title"> <%= question.description %> </h5>
+          </div>
+          <div class="card-body">
+            <ul>
+              <% question.answers.each do |answer| %>
+                <li> 
+                  <p><%= radio_button_tag 'answer_id', answer.id %> <%= answer.description %></p> 
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <%= form.submit "Enviar resposta", class:"btn btn-secondary btn-color btn-border", id:"submit_#{question.id}" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+<% if user_signed_in? %>
+  <div class="paginate">
+    <%= paginate @questions %>
+  </div>
+<% else %>
+  <div class="alert alert-warning" role="alert" style="width:fit-content; margin-left:40%">
+    Efetue o login para continuar respondendo as questões!
+  </div>  
+<% end %>
+

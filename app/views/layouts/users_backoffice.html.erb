@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Time to Answer - User </title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- CSS links -->
+    <%= stylesheet_link_tag    'application' %>
+    <%= stylesheet_link_tag    'users_backoffice' %>
+    <!-- End of CSS links -->
+
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix" style="margin-top:35px">
+              <div class="profile_pic" style="height:70px; padding-left:10px">
+                <%= link_to image_tag(avatar_url,
+                                      alt:"...", class:"img-circle profile_img",
+                                      style: "padding:0px; margin:0px; height:65px; width:65px",
+                                      id: "avatarLg"), 
+                                      '#', "data-toggle":"modal", "data-target":"#avatarModal" %>
+              </div>
+              <div class="profile_info" 
+                style="display:contents; width: -webkit-fill-available; height: 60px;">
+                <div style="padding:9px 0 0 90px">
+                  <span style="font-size: 16px; font-weight:bold">Seja bem-vindo,</span>
+                  <h2 style="font-size: 15px;"> <%= current_user.full_name %> </h2>
+                </div>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu"
+                  style="margin:0px">
+              <div class="menu_section">
+                <ul class="nav side-menu">                  
+                  <li>
+                    <%= link_to users_backoffice_welcome_index_path do %>
+                      <i class="fa fa-home"></i>Início
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to users_backoffice_profile_path do %>
+                      <i class="fa fa-user"></i>Dados do Perfil
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right" style="margin:5px 30px 0 0; font-size:14px">
+                <li>
+                  <a href="javascript:;" class="user-profile dropdown-toggle" 
+                      data-toggle="dropdown" aria-expanded="false" style="height:70px">
+                    <%= image_tag avatar_url, 
+                                  alt:'...', style:"height:40px; width:40px",
+                                  id:'avatarSm' %>
+                    <span style="vertical-align: middle"><%= current_user.full_name %></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" 
+                      style="height:36px; transform: translate3d(-10px, 50px, 0px);">
+                    <li style="font-size:18px; margin:5px 0 5px 0;">
+                      <%= link_to destroy_user_session_path, method: :delete, 
+                          style: "padding:8px 40px 8px 15px; margin-left: 15px" do %>
+                        <i class="fa fa-sign-out pull-right" 
+                            style="font-size:20px; margin:1px 30px 0 0; padding-top:2px"></i>
+                        Sair
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="content" style="display:grid; height:100%; width:100%;">
+            <%= yield %>
+          </div> 
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer style="display:block;padding-top:30px">
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- Small modal -->
+    <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <%= form_with(url: users_backoffice_profile_path, model: current_user,
+                        class:"form-horizontal form-label-left") do |form| %>
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Alterar foto de perfil</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="padding: 0 0 0 20px; margin:0px">
+              <%= form.fields_for :user_profile do |profile_form| %>
+                <div class="item form-group" style="height:80px; width:100%">
+                  <%= image_tag(avatar_url, alt:"...", 
+                                          class:"img-circle profile_img", 
+                                          style:"margin:2% 0 2% 0; padding:0px; width:100px; height:100px", 
+                                          id:"avatarMd") %>
+                  <%= profile_form.file_field :avatar, 
+                                          style:"padding:0px; align-self:center; margin:8% 0 0 4%; font-size:16px" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="modal-footer" style="margin-top:40px">
+              <%= form.submit "Salvar", class:"btn btn-primary" %>
+            </div>
+          <% end %>  
+        </div>
+      </div>
+    </div>
+
+    <!-- JS links -->
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'users_backoffice' %>
+    <!-- End of JS links -->
+
+    <% if notice %>
+        <%= javascript_tag do %>
+            $.bootstrapGrowl('<%= notice %>', {
+            type: 'success', // (null, 'info', 'danger', 'success')
+            align: 'right', // ('left', 'right', or 'center')
+            allow_dismiss: true, // If true then will display a cross to close the popup.
+            stackup_spacing: 10 // spacing between consecutively stacked growls.
+            });
+        <% end %>
+    <% end %>
+
+    <%= javascript_tag do %>
+       $(function() {
+         $('.datepicker').datepicker();
+       });
+    <% end  %>
+
+  </body>
+</html>

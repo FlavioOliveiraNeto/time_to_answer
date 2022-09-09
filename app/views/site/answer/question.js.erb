@@ -1,0 +1,15 @@
+var element = document.getElementById('submit_<%= @answer.question_id %>')
+
+element.classList.remove('btn-color')
+element.classList.remove("btn-secondary");
+element.removeAttribute('data-disable-with')
+
+if(<%= @answer.correct %>) {
+    element.classList.remove("btn-danger");
+    element.classList.add('btn-success')
+    element.value = 'CORRETO!'
+} else {
+    element.classList.remove("btn-success");
+    element.classList.add('btn-danger')
+    element.value = 'INCORRETO!'
+}
